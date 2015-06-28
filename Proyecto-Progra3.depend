@@ -1,0 +1,54 @@
+# depslib dependency file v1.0
+1435501849 source:/home/kchinchilla/Documents/ProyectoFinal/Proyecto-Progra3/carro1.cpp
+	"carro1.h"
+
+1435434242 /home/kchinchilla/Documents/ProyectoFinal/Proyecto-Progra3/carro1.h
+	"personaje.h"
+
+1435501849 source:/home/kchinchilla/Documents/ProyectoFinal/Proyecto-Progra3/carro2.cpp
+	"carro2.h"
+
+1435434335 /home/kchinchilla/Documents/ProyectoFinal/Proyecto-Progra3/carro2.h
+	"personaje.h"
+
+1435501849 source:/home/kchinchilla/Documents/ProyectoFinal/Proyecto-Progra3/carro3.cpp
+	"carro3.h"
+
+1435434347 /home/kchinchilla/Documents/ProyectoFinal/Proyecto-Progra3/carro3.h
+	"personaje.h"
+
+1435501849 source:/home/kchinchilla/Documents/ProyectoFinal/Proyecto-Progra3/carro4.cpp
+	"carro4.h"
+
+1435434347 /home/kchinchilla/Documents/ProyectoFinal/Proyecto-Progra3/carro4.h
+	"personaje.h"
+
+1435502363 source:/home/kchinchilla/Documents/ProyectoFinal/Proyecto-Progra3/main.cpp
+	<SDL2/SDL.h>
+	<SDL2/SDL_image.h>
+	<SDL2/SDL_mixer.h>
+	<iostream>
+	<list>
+	"personaje.h"
+	"carro1.h"
+	"carro2.h"
+	"carro3.h"
+	"carro4.h"
+	"jugador.h"
+
+1435444436 source:/home/kchinchilla/Documents/ProyectoFinal/Proyecto-Progra3/personaje.cpp
+	"personaje.h"
+
+1435444196 /home/kchinchilla/Documents/ProyectoFinal/Proyecto-Progra3/personaje.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_image.h>
+
+1435502167 source:/home/kchinchilla/Documents/ProyectoFinal/Proyecto-Progra3/jugador.cpp
+	"jugador.h"
+
+1435444638 /home/kchinchilla/Documents/ProyectoFinal/Proyecto-Progra3/jugador.h
+	"personaje.h"
+	<vector>
+	<list>
+	<iostream>
+
