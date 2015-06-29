@@ -1,12 +1,12 @@
 #include "carro1.h"
 
-carro1::carro1(SDL_Renderer* renderer)
+carro1::carro1(SDL_Renderer* renderer, int pos)
 {
     this->renderer = renderer;
     int w,h;
-    textura = IMG_LoadTexture(renderer, "carro1.png");
+    textura = IMG_LoadTexture(renderer, "I - carro1.png");
     SDL_QueryTexture(textura, NULL, NULL, &w, &h);
-    rect_textura.x = 100;
+    rect_textura.x = pos;
     rect_textura.y = 0;
     rect_textura.w = w;
     rect_textura.h = h;

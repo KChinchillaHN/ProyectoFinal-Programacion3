@@ -9,7 +9,7 @@ class carro2 : public personaje
         void dibujar();
         void logica();
 
-        carro2(SDL_Renderer* renderer);
+        carro2(SDL_Renderer* renderer, int pos2);
         virtual ~carro2();
     protected:
     private:

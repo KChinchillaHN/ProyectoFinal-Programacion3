@@ -5,7 +5,7 @@ jugador::jugador(SDL_Renderer *renderer,list<personaje*>*personajes)
     this->renderer = renderer;
     this->personajes = personajes;
     int w,h;
-    textura = IMG_LoadTexture(renderer, "jugador.png");
+    textura = IMG_LoadTexture(renderer, "I - carro5.png");
     SDL_QueryTexture(textura, NULL, NULL, &w, &h);
     rect_textura.x = 100;
     rect_textura.y = 100;

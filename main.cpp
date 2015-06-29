@@ -10,6 +10,7 @@
 #include "carro3.h"
 #include "carro4.h"
 #include "jugador.h"
+#include "Cuadro_SinAccion.h"
 
 using namespace std;
 
@@ -26,13 +27,13 @@ void musicaMenu(int NivelM)
     {
     if(Mix_PlayingMusic()==0)
         {
-            Mix_PlayMusic(gMusic,-1);
+            Mix_PlayMusic(gMusic, -1);
         }
-    if( Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+    if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
         {
             printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", SDL_GetError());
         }
-    gMusic=Mix_LoadMUS("Thunderstruck.mp3");
+    gMusic=Mix_LoadMUS("M - Facil.mp3");
     if(gMusic==NULL)
         {
             printf("Error loading: %s\n", Mix_GetError());
@@ -49,54 +50,74 @@ void musicaMenu(int NivelM)
         {
             printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", SDL_GetError());
         }
-    gMusic=Mix_LoadMUS("Fade.mp3");
+    gMusic=Mix_LoadMUS("M - Medio.mp3");
     if(gMusic==NULL)
         {
             printf("Error loading: %s\n", Mix_GetError());
         }
     }
 
+    if (NivelM==3)
+    {
+    if(Mix_PlayingMusic()==0)
+        {
+            Mix_PlayMusic(gMusic,-1);
+        }
+    if( Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+        {
+            printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", SDL_GetError());
+        }
+    gMusic=Mix_LoadMUS("M - Dificil.mp3");
+    if(gMusic==NULL)
+        {
+            printf("Error loading: %s\n", Mix_GetError());
+        }
+    }
+
+    if (NivelM==4)
+    {
+    if(Mix_PlayingMusic()==0)
+        {
+            Mix_PlayMusic(gMusic,-1);
+        }
+    if( Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+        {
+            printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", SDL_GetError());
+        }
+    gMusic=Mix_LoadMUS("M - Super.mp3");
+    if(gMusic==NULL)
+        {
+            printf("Error loading: %s\n", Mix_GetError());
+        }
+    }
 }
 
 void juegoFacil()
 {
-    //Init textures
     int w=0,h=0;
-    background = IMG_LoadTexture(renderer,"Pantalla.png");
+    int pos=40, pos2=1000, pos3=1000, pos4=1040;
+    int posb=540, pos2b=540, pos3b=540, pos4b=540;
+    background = IMG_LoadTexture(renderer,"I - Pantalla.png");
     SDL_QueryTexture(background, NULL, NULL, &w, &h);
     rect_background.x = 0;
     rect_background.y = 0;
     rect_background.w = w;
     rect_background.h = h;
-
-//
-//    float enemigo_y = 0;
-
-
-    //Main Loop
-    float personaje_x = 100;
-    float personaje_y = 100;
-
     unsigned int frame_anterior = SDL_GetTicks();
+    int frame=0;
+    musicaMenu(1);
 
     list<personaje*>personajes;
-    personajes.push_back(new carro1(renderer));
-    personajes.push_back(new carro2(renderer));
-    personajes.push_back(new carro3(renderer));
-    personajes.push_back(new carro4(renderer));
+    personajes.push_back(new carro1(renderer, pos));
+    personajes.push_back(new carro2(renderer, pos2));
+    personajes.push_back(new carro3(renderer, pos3));
+    personajes.push_back(new carro4(renderer, pos4));
     personajes.push_back(new jugador(renderer,&personajes));
-
-    int frame=0;
 
     while(true)
     {
         while(SDL_PollEvent(&Event))
         {
-             musicaMenu(2);
-            if(Event.type == SDL_QUIT)
-            {
-                return;
-            }
             if(Event.type == SDL_KEYDOWN)
             {
                 if(Event.key.keysym.sym == SDLK_ESCAPE)
@@ -106,64 +127,134 @@ void juegoFacil()
             }
         }
 
-        for(list<personaje*>::iterator i=personajes.begin();
-            i!=personajes.end();
-            i++)
-            (*i)->logica();
+        if(frame<5000)
+        {
+            if(frame%140==0)
+            {
+                personajes.push_back(new carro1(renderer, pos));
+                pos+=39;
+                if(pos>550)
+                    pos=40;
 
-        SDL_RenderCopy(renderer, background, NULL, &rect_background);
+                personajes.push_back(new carro1(renderer, posb));
+                posb-=39;
+                if(posb<40)
+                    posb=551;
+            }
+        }
 
-        for(list<personaje*>::iterator i=personajes.begin();
-            i!=personajes.end();
-            i++)
-            (*i)->dibujar();
+        if(frame>1000&frame<5000)
+        {
+            if(frame%140==0)
+            {
+                personajes.push_back(new carro2(renderer, pos2));
+                pos2+=50;
+                if(pos2>540)
+                    pos2=50;
 
-        if((SDL_GetTicks()-frame_anterior)<17)
-            SDL_Delay(17-(SDL_GetTicks()-frame_anterior));
-        frame_anterior=SDL_GetTicks();
+                personajes.push_back(new carro2(renderer, pos2b));
+                pos2b-=50;
+                if(pos2b<50)
+                    pos2b=540;
+            }
+        }
 
-        SDL_RenderPresent(renderer);
-        frame++;
+        if(frame>3500&frame<5000)
+        {
+            if(frame%140==0)
+            {
+                personajes.push_back(new carro3(renderer, pos3));
+                pos3+=60;
+                if(pos2>551)
+                    pos2=50;
+
+                personajes.push_back(new carro3(renderer, pos3b));
+                pos3b-=60;
+                if(pos3b<50)
+                    pos3b=550;
+            }
+        }
+
+    for(list<personaje*>::iterator i=personajes.begin();i!=personajes.end();i++)
+    (*i)->logica();
+    SDL_RenderCopy(renderer, background, NULL, &rect_background);
+
+    for(list<personaje*>::iterator i=personajes.begin();i!=personajes.end();i++)
+    (*i)->dibujar();
+
+    if((SDL_GetTicks()-frame_anterior)<17)
+        SDL_Delay(17-(SDL_GetTicks()-frame_anterior));
+
+    frame_anterior=SDL_GetTicks();
+    SDL_RenderPresent(renderer);
+    frame++;
+    }
+}
+
+void Instrucciones()
+{
+    int w=0,h=0;
+    SDL_Texture* background_instrucciones = IMG_LoadTexture(renderer,"I - Instrucciones.png");
+    SDL_QueryTexture(background_instrucciones, NULL, NULL, &w, &h);
+    rect_background.x = 0;
+    rect_background.y = 0;
+    rect_background.w = w;
+    rect_background.h = h;
+    while(true)
+    {
+        while(SDL_PollEvent(&Event))
+        {
+            if(Event.type == SDL_KEYDOWN)
+            {
+                if(Event.key.keysym.sym == SDLK_ESCAPE)
+                {
+                    return;
+                }
+            }
+        }
+    SDL_RenderCopy(renderer, background_instrucciones, NULL, &rect_background);
+    SDL_RenderPresent(renderer);
     }
 }
 
 void menu()
 {
-    int w,h;
-    SDL_Texture* background_menu = IMG_LoadTexture(renderer,"Menu.png");
-    SDL_QueryTexture(background_menu, NULL, NULL, &w, &h);
-    rect_background.x = 0;
-    rect_background.y = 0;
-    rect_background.w = w;
-    rect_background.h = h;
-
-
     while(true)
     {
+        Mix_PauseMusic();
+        Mix_HaltMusic();
         while(SDL_PollEvent(&Event))
         {
-            musicaMenu(1);
-            if(Event.type == SDL_QUIT)
-            {
-
-                return;
-            }
-            if(Event.type == SDL_KEYDOWN)
-            {
-                if(Event.key.keysym.sym == SDLK_f)
+        int w,h;
+        SDL_Texture* background_menu = IMG_LoadTexture(renderer,"I - Menu.png");
+        SDL_QueryTexture(background_menu, NULL, NULL, &w, &h);
+        rect_background.x = 0;
+        rect_background.y = 0;
+        rect_background.w = w;
+        rect_background.h = h;
+        if(Event.type == SDL_KEYDOWN)
+        {
+            if(Event.key.keysym.sym == SDLK_f)
                 {
                     juegoFacil();
                 }
-            }
+            if(Event.key.keysym.sym == SDLK_t)
+                {
+                    exit(0);
+                }
+
+            if(Event.key.keysym.sym == SDLK_i)
+                {
+                    Instrucciones();
+                }
         }
         SDL_RenderCopy(renderer, background_menu, NULL, &rect_background);
         SDL_RenderPresent(renderer);
+        }
     }
-
 }
 
-
-int main( int argc, char* args[] )
+int main()
 {
     //Init SDL
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
