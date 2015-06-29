@@ -20,7 +20,45 @@ SDL_Texture *background;
 SDL_Rect rect_background;
 Mix_Music *gMusic = NULL;
 
-void juego()
+void musicaMenu(int NivelM)
+{
+    if (NivelM==1)
+    {
+    if(Mix_PlayingMusic()==0)
+        {
+            Mix_PlayMusic(gMusic,-1);
+        }
+    if( Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+        {
+            printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", SDL_GetError());
+        }
+    gMusic=Mix_LoadMUS("Thunderstruck.mp3");
+    if(gMusic==NULL)
+        {
+            printf("Error loading: %s\n", Mix_GetError());
+        }
+    }
+
+    if (NivelM==2)
+    {
+    if(Mix_PlayingMusic()==0)
+        {
+            Mix_PlayMusic(gMusic,-1);
+        }
+    if( Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+        {
+            printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", SDL_GetError());
+        }
+    gMusic=Mix_LoadMUS("Fade.mp3");
+    if(gMusic==NULL)
+        {
+            printf("Error loading: %s\n", Mix_GetError());
+        }
+    }
+
+}
+
+void juegoFacil()
 {
     //Init textures
     int w=0,h=0;
@@ -30,6 +68,7 @@ void juego()
     rect_background.y = 0;
     rect_background.w = w;
     rect_background.h = h;
+
 //
 //    float enemigo_y = 0;
 
@@ -53,6 +92,7 @@ void juego()
     {
         while(SDL_PollEvent(&Event))
         {
+             musicaMenu(2);
             if(Event.type == SDL_QUIT)
             {
                 return;
@@ -90,33 +130,38 @@ void juego()
 void menu()
 {
     int w,h;
-    SDL_Texture* background_menu = IMG_LoadTexture(renderer,"menu.png");
+    SDL_Texture* background_menu = IMG_LoadTexture(renderer,"Menu.png");
     SDL_QueryTexture(background_menu, NULL, NULL, &w, &h);
     rect_background.x = 0;
     rect_background.y = 0;
     rect_background.w = w;
     rect_background.h = h;
 
+
     while(true)
     {
         while(SDL_PollEvent(&Event))
         {
+            musicaMenu(1);
             if(Event.type == SDL_QUIT)
             {
+
                 return;
             }
             if(Event.type == SDL_KEYDOWN)
             {
-                if(Event.key.keysym.sym == SDLK_RETURN)
+                if(Event.key.keysym.sym == SDLK_f)
                 {
-                    juego();
+                    juegoFacil();
                 }
             }
         }
         SDL_RenderCopy(renderer, background_menu, NULL, &rect_background);
         SDL_RenderPresent(renderer);
     }
+
 }
+
 
 int main( int argc, char* args[] )
 {
@@ -141,21 +186,3 @@ int main( int argc, char* args[] )
     menu();
 	return 0;
 }
-
-void musica()
-{
-    if(Mix_PlayingMusic()==0)
-        {
-            Mix_PlayMusic(gMusic,-1);
-        }
-    if( Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
-        {
-            printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", SDL_GetError());
-        }
-    gMusic=Mix_LoadMUS("Fade.mp3");
-    if(gMusic==NULL)
-        {
-            printf("Error loading: %s\n", Mix_GetError());
-        }
-}
-

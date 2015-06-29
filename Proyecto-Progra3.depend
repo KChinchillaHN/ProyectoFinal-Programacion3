@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1435501849 source:/home/kchinchilla/Documents/ProyectoFinal/Proyecto-Progra3/carro1.cpp
+1435502540 source:/home/kchinchilla/Documents/ProyectoFinal/Proyecto-Progra3/carro1.cpp
 	"carro1.h"
 
 1435434242 /home/kchinchilla/Documents/ProyectoFinal/Proyecto-Progra3/carro1.h
@@ -23,7 +23,7 @@
 1435434347 /home/kchinchilla/Documents/ProyectoFinal/Proyecto-Progra3/carro4.h
 	"personaje.h"
 
-1435502363 source:/home/kchinchilla/Documents/ProyectoFinal/Proyecto-Progra3/main.cpp
+1435537123 source:/home/kchinchilla/Documents/ProyectoFinal/Proyecto-Progra3/main.cpp
 	<SDL2/SDL.h>
 	<SDL2/SDL_image.h>
 	<SDL2/SDL_mixer.h>
