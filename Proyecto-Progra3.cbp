@@ -32,8 +32,6 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="Cuadro_SinAccion.cpp" />
-		<Unit filename="Cuadro_SinAccion.h" />
 		<Unit filename="carro1.cpp" />
 		<Unit filename="carro1.h" />
 		<Unit filename="carro2.cpp" />
